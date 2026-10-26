@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Aplikasi keuangan keluarga — catat transaksi, dompet, budget, tabungan, dan tagihan.">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <title>Keuangan Digital</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22%230F5C3F%22/%3E%3Cpath d=%22M20 44c0-14 10-24 26-24-1 15-11 26-26 24z%22 fill=%22%237BF7B8%22/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#0F5C3F">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://script.google.com">
+  <link rel="preconnect" href="https://script.googleusercontent.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..24,400..500,0..1,0&icon_names=account_balance,account_balance_wallet,account_circle,add,add_card,add_circle,add_shopping_cart,add_task,alarm,archive,arrow_back,arrow_downward,arrow_forward,arrow_upward,attach_money,auto_awesome,autorenew,backup,badge,balance,bar_chart,bolt,build,calendar_month,calendar_today,card_giftcard,category,celebration,check,check_circle,checkroom,chevron_left,chevron_right,child_care,cleaning_services,close,cloud_done,cloud_off,content_copy,credit_card,dark_mode,data_usage,database,delete,delete_sweep,description,difference,directions_car,done_all,donut_large,download,drag_indicator,eco,edit,emoji_events,error,event,event_upcoming,expand_more,family_restroom,filter_alt_off,fitness_center,flag,flight_takeoff,folder_open,gpp_maybe,grid_view,group,help,history,home,hourglass_top,image,info,insights,install_mobile,light_mode,lightbulb,local_cafe,local_gas_station,lock,logout,mail,medical_services,menu,menu_book,more_horiz,more_vert,mosque,movie,north,north_east,notifications,notifications_active,notifications_off,open_in_new,palette,payments,person_add,pets,phone_iphone,pie_chart,preview,print,priority_high,query_stats,receipt,receipt_long,record_voice_over,redeem,refresh,remove,report,restart_alt,restaurant,save,savings,schedule,school,search,search_off,send,settings,shield,shield_person,shopping_bag,shopping_cart,smartphone,south,south_west,spa,sports_esports,storefront,summarize,swap_horiz,switch_account,sync,table_view,task_alt,timer,trending_down,trending_up,tune,two_wheeler,unarchive,upload,verified,verified_user,visibility,visibility_off,volunteer_activism,wallet,warning,water_drop,waving_hand,wifi,work,workspace_premium,zoom_in,zoom_out&display=block">
+  <script>
+    /* Terapkan tema tersimpan sedini mungkin (mencegah kedipan) */
+    (function () {
+      try {
+        var t = localStorage.getItem('kd_theme');
+        if (!t) t = (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+        if (localStorage.getItem('kd_privasi') === '1') document.documentElement.classList.add('privasi');
+      } catch (e) { /* abaikan */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ═══════════ GERBANG: LOGIN GOOGLE / AKSES DITOLAK ═══════════ -->
+  <div class="gate" id="gate">
+    <div class="gate-brand">
+      <div class="brand-logo"><span class="ms">eco</span></div>
+      <div><b id="gateNama">Keuangan Digital</b><small id="gateSub">Aplikasi keuangan keluarga</small></div>
+    </div>
+    <div class="gate-card" id="gateCard"><div style="padding:30px 0"><div class="spinner" style="width:34px;height:34px;border-width:3px;color:var(--primary)"></div><p class="muted mt-3">Memuat aplikasi…</p></div></div>
+    <noscript><p class="gate-foot">Aktifkan JavaScript untuk memakai aplikasi ini.</p></noscript>
+  </div>
+
+
+  <div class="app" id="app" hidden>
+    <!-- ═══════════ SIDEBAR ═══════════ -->
+    <aside class="sidebar" id="sidebar" aria-label="Menu utama">
+      <div class="brand">
+        <div class="brand-logo" data-slot="logo"><span class="ms">eco</span></div>
+        <div class="brand-txt">
+          <div class="brand-name" data-slot="app-name">Keuangan Digital</div>
+          <div class="brand-sub" data-slot="app-sub">Keuangan keluarga</div>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-block btn-new" data-act="tx-new" title="Transaksi Baru"><span class="ms">add_circle</span><span>Transaksi Baru</span></button>
+      <nav class="nav" id="nav">
+        <button class="nav-item active" data-go="dashboard" title="Dashboard"><span class="ms">grid_view</span><span>Dashboard</span></button>
+        <button class="nav-item" data-go="transaksi" title="Transaksi"><span class="ms">receipt_long</span><span>Transaksi</span></button>
+        <button class="nav-item" data-go="dompet" title="Dompet"><span class="ms">account_balance_wallet</span><span>Dompet</span></button>
+        <button class="nav-item" data-go="budget" title="Budget &amp; Kategori"><span class="ms">donut_large</span><span>Budget &amp; Kategori</span></button>
+        <button class="nav-item" data-go="tabungan" title="Tabungan"><span class="ms">savings</span><span>Tabungan</span><span class="nav-badge" data-slot="badge-tabungan" hidden></span></button>
+        <button class="nav-item" data-go="tagihan" title="Tagihan"><span class="ms">receipt</span><span>Tagihan</span><span class="nav-badge" data-slot="badge-tagihan" hidden></span></button>
+        <button class="nav-item" data-go="laporan" title="Laporan"><span class="ms">bar_chart</span><span>Laporan</span></button>
+        <button class="nav-item" data-go="pengaturan" title="Pengaturan"><span class="ms">settings</span><span>Pengaturan</span></button>
+      </nav>
+      <div class="side-tip" data-slot="side-tip"></div>
+      <div class="side-foot">
+        <button class="nav-item" data-act="profil" title="Profil Keluarga"><span class="ms">group</span><span>Profil Keluarga</span></button>
+        <button class="nav-item logout" data-act="logout" title="Keluar"><span class="ms">logout</span><span>Keluar</span></button>
+      </div>
+    </aside>
+    <div class="scrim" id="scrim" data-act="drawer-close"></div>
+
+    <!-- ═══════════ AREA UTAMA ═══════════ -->
+    <div class="main">
+      <header class="topbar">
+        <button class="icon-btn tb-menu" data-act="drawer-open" aria-label="Buka menu"><span class="ms">menu</span></button>
+        <div class="tb-brand">
+          <div class="brand-logo" data-slot="logo"><span class="ms">eco</span></div>
+          <div class="brand-txt">
+            <div class="brand-name" data-slot="app-name">Keuangan Digital</div>
+            <div class="brand-sub" data-slot="app-sub">Keuangan keluarga</div>
+          </div>
+        </div>
+        <label class="search" for="globalSearch">
+          <span class="ms">search</span>
+          <input id="globalSearch" type="search" data-in="gsearch" placeholder="Cari transaksi, kategori, atau catatan…" autocomplete="off" aria-label="Cari transaksi">
+        </label>
+        <div class="tb-spacer"></div>
+        <span class="tb-date" data-slot="today"><span class="ms">calendar_today</span><span></span></span>
+        <span class="sync-pill ok" id="syncPill" title="Status sinkronisasi"><span class="ms">cloud_done</span><span class="txt">Tersinkron</span></span>
+        <button class="icon-btn" id="btnTheme" data-act="theme" aria-label="Ganti mode terang/gelap"><span class="ms">dark_mode</span></button>
+        <button class="icon-btn" data-act="notif" aria-label="Notifikasi"><span class="ms">notifications</span><span class="dot-badge" data-slot="notif-count" hidden></span></button>
+        <button class="user-chip" data-act="usermenu" aria-label="Menu akun">
+          <span class="avatars" data-slot="avatars"></span>
+          <span class="uc-txt"><span class="uc-name" data-slot="family"></span><br><span class="uc-sub" data-slot="me"></span></span>
+          <span class="ms uc-txt" style="color:var(--text-3)">expand_more</span>
+        </button>
+      </header>
+
+      <main class="content" id="content">
+        <section class="page active" id="page-dashboard" aria-label="Dashboard"></section>
+        <section class="page" id="page-transaksi" aria-label="Transaksi"></section>
+        <section class="page" id="page-dompet" aria-label="Dompet"></section>
+        <section class="page" id="page-budget" aria-label="Budget dan Kategori"></section>
+        <section class="page" id="page-tabungan" aria-label="Tabungan"></section>
+        <section class="page" id="page-tagihan" aria-label="Tagihan"></section>
+        <section class="page" id="page-tagihan-form" aria-label="Formulir Tagihan"></section>
+        <section class="page" id="page-laporan" aria-label="Laporan"></section>
+        <section class="page" id="page-pengaturan" aria-label="Pengaturan"></section>
+      </main>
+    </div>
+
+    <!-- ═══════════ NAVIGASI BAWAH (HP) ═══════════ -->
+    <nav class="bottom-nav" aria-label="Navigasi bawah">
+      <button class="bn-item active" data-go="dashboard"><span class="ms">home</span>Beranda</button>
+      <button class="bn-item" data-go="transaksi"><span class="ms">receipt_long</span>Transaksi</button>
+      <button class="bn-fab" data-act="tx-new" aria-label="Catat transaksi baru"><span class="ms">add</span></button>
+      <button class="bn-item" data-go="tagihan"><span class="ms">receipt</span>Tagihan<span class="bn-dot" data-slot="bn-dot" hidden></span></button>
+      <button class="bn-item" data-go="laporan"><span class="ms">bar_chart</span>Laporan</button>
+    </nav>
+  </div>
+
+  <!-- ═══════════ PRATINJAU CETAK / PDF ═══════════ -->
+  <section class="print-view" id="printView" aria-label="Pratinjau dokumen cetak">
+    <div class="pv-bar">
+      <button class="btn btn-ghost btn-sm" data-act="print-close"><span class="ms">arrow_back</span><span class="hide-m">Kembali ke Laporan</span></button>
+      <span class="icon-well sm hide-m"><span class="ms">description</span></span>
+      <div class="grow"><b>Pratinjau Dokumen Cetak</b> <span class="pill pill-ok" id="pvPages">A4 Portrait</span><div class="small muted" id="pvSub"></div></div>
+      <div class="zoom"><button data-act="pv-zoom" data-z="-1" aria-label="Perkecil"><span class="ms">zoom_out</span></button><span id="pvZoom">100%</span><button data-act="pv-zoom" data-z="1" aria-label="Perbesar"><span class="ms">zoom_in</span></button></div>
+      <button class="btn btn-outline btn-sm" data-act="pv-pdf"><span class="ms">download</span>Simpan sebagai PDF</button>
+      <button class="btn btn-primary btn-sm" data-act="pv-print"><span class="ms">print</span>Cetak Dokumen Sekarang</button>
+    </div>
+    <div class="pv-stage"><div class="pv-page" id="pvPage"></div></div>
+    <div class="pv-tip"><b>Tips Cetak:</b> pastikan opsi <i>"Background graphics / Grafis latar belakang"</i> dicentang di dialog cetak agar warna kartu tampil sempurna.</div>
+  </section>
+
+  <div id="modal-root" aria-live="polite"></div>
+  <div id="toast-root" role="status" aria-live="polite"></div>
+
+  <!-- Konfigurasi (isi GAS_URL & GOOGLE_CLIENT_ID) → lapisan API → aplikasi -->
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
